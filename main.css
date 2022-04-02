@@ -1,8 +1,12 @@
-.emote-bh {
-	font-weight: bold;
-	color: rgb(209, 101, 101);
+span#bh-date {
+	color: rgba(255, 0, 0, 0.524) !important;
+	font-weight:bold;
+	/* visibility: hidden; */
 }
 
-/* html body {
-	background: black;
+/* span#bh-date:after {
+	content: '1174 days left';
+	visibility: visible;
+	display: block;
+	position: absolute;
 } */
