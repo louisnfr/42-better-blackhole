@@ -20,6 +20,8 @@ fetch(blackhole_url)
 	.then(response => response.json())
 	.then(data => {
 		const days_left = data['singularity'];
+		if (!days_left)
+			throw "No days found in data";
 		const bh_date = data['date'];
 
 		const status = {
@@ -51,4 +53,7 @@ fetch(blackhole_url)
 
 		document.getElementById('bh-date').replaceWith(days);
 		document.getElementById('bh-date').appendChild(date);
-})
+	})
+	.catch((err) => {
+		throw err;
+	})
