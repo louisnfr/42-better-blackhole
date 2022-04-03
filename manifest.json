@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
-	"name": "42 Better BlackHole",
-	"description": "Improves the blackhole display.",
+	"name": "42 Better Blackhole",
+	"description": "Improves the Blackhole display.",
 	"version": "1.0",
 	"icons": {
 		"48": "/images/icon.png"
