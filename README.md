@@ -1,4 +1,4 @@
-# 42 Better BlackHole
+# 42 Better Blackhole
 
 Chrome extension to display the number of days remaining before being absorbed by the black hole of 42. The date is displayed below.
 
