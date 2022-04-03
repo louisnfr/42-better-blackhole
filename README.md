@@ -7,4 +7,6 @@ Chrome extension to display the number of days remaining before being absorbed b
   <img src="https://user-images.githubusercontent.com/57815912/161406990-18a36b01-ae86-427e-b184-8b7e7b6767f6.png" />
 </p>
 
+Soon available on the Chrome Web Store.
+
 Based on [mhaddi's](https://github.com/mohamedhaddi/ft_blackhole) extension
