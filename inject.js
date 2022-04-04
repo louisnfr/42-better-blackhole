@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   content.js                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lraffin <lraffin@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 02:38:34 by lraffin           #+#    #+#             */
-/*   Updated: 2022/04/03 02:38:34 by lraffin          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 const login = document
 	.getElementsByClassName('login')[0]
 	.getAttribute('data-login');
@@ -43,7 +31,9 @@ fetch(blackhole_url)
 		const days = document.createElement("div");
 		const date = document.createElement("div");
 
-		days.innerText = Math.abs(days_left) + " days " + status[emotion]["text"] + status[emotion]["emote"];
+		// if ()
+		days.innerText = Math.abs(days_left) + " days " + status[emotion]["text"];
+		// days.innerText = Math.abs(days_left) + " days " + status[emotion]["text"] + status[emotion]["emote"];
 		days.style.color = status[emotion]["color"];
 
 		date.innerText = bh_date;
