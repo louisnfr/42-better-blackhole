@@ -33,10 +33,10 @@ fetch(blackhole_url)
 		}
 
 		const emotion = (() => {
-			if (days_left <= 0) {return 'dead';}
-			else if (days_left <= 15) {return 'sad';}
-			else if (days_left <= 42) {return 'scared';}
-			else if (days_left <= 100) {return 'happy';}
+			if (days_left < 0) {return 'dead';}
+			else if (days_left < 15) {return 'sad';}
+			else if (days_left < 42) {return 'scared';}
+			else if (days_left < 100) {return 'happy';}
 			else {return 'wow';}
 		})();
 
