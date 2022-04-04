@@ -1,14 +1,18 @@
+
+// tuto popup
+// https://www.section.io/engineering-education/how-to-build-chrome-extension/
+
 document.addEventListener("DOMContentLoaded", function () {
 
 	// EXTENSION
 
 	document.querySelector("#enable_ext").addEventListener("click", function () {
 		toggleEnabled(true, settingsSavedReloadMessage);
-	});
+	}, false);
 
 	document.querySelector("#disable_ext").addEventListener("click", function () {
 		toggleEnabled(false, settingsSavedReloadMessage);
-	});
+	}, false);
 
 	// EMOTES
 
@@ -52,9 +56,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	  }
 
 	  function setStatusMessage(str) {
-		const status_element = document.querySelector("#status");
+		const status_element = document.querySelector("#status_ext");
 		status_element.classList.toggle("hide", false);
 		status_element.innerText = str;
 	  }
 
-});
+}, false);
