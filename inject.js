@@ -1,11 +1,13 @@
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if(request.method == "changePage"){
-            document.body.innerText = "Foot";
-            sendResponse({text: document.body.innerText, method: "changePage"}); //same as innerText
-        }
-    }
-);
+var toggleExtension;
+var toggleEmotes;
+
+chrome.storage.sync.get(['enabled'], function(result){
+	toggleExtension = result.enabled;
+})
+
+chrome.storage.sync.get(['emotes'], function(result){
+	toggleEmotes = result.emotes;
+})
 
 const login = document
 	.getElementsByClassName('login')[0]
@@ -40,9 +42,10 @@ fetch(blackhole_url)
 		const days = document.createElement("div");
 		const date = document.createElement("div");
 
-		// if ()
-		days.innerText = Math.abs(days_left) + " days " + status[emotion]["text"];
-		// days.innerText = Math.abs(days_left) + " days " + status[emotion]["text"] + status[emotion]["emote"];
+		if (toggleEmotes)
+			days.innerText = Math.abs(days_left) + " days " + status[emotion]["text"] + status[emotion]["emote"];
+		else
+			days.innerText = Math.abs(days_left) + " days " + status[emotion]["text"];
 		days.style.color = status[emotion]["color"];
 
 		date.innerText = bh_date;
@@ -50,8 +53,10 @@ fetch(blackhole_url)
 		date.style.fontSize = "0.6em";
 		date.style.fontWeight = "400";
 
-		document.getElementById('bh-date').replaceWith(days);
-		document.getElementById('bh-date').appendChild(date);
+		if (toggleExtension) {
+			document.getElementById('bh-date').replaceWith(days);
+			document.getElementById('bh-date').appendChild(date);
+		}
 	})
 	.catch((err) => {
 		throw err;

@@ -1,36 +1,33 @@
-
-// tuto popup
-// https://www.section.io/engineering-education/how-to-build-chrome-extension/
-
 document.addEventListener("DOMContentLoaded", function () {
-
-	// EXTENSION
-
-	document.querySelector("#enable_ext").addEventListener("click", function () {
-		toggleEnabled(true, settingsSavedReloadMessage);
-	}, false);
-
-	document.querySelector("#disable_ext").addEventListener("click", function () {
-		toggleEnabled(false, settingsSavedReloadMessage);
-	}, false);
-
-	// EMOTES
-
-	// document.querySelector("#enable_emotes").addEventListener("click", function () {
-	// 	document.getElementById("enable_emotes").hidden = true;
-	// 	document.getElementById("disable_emotes").hidden = false;
-	// });
-
-	// document.querySelector("#disable_emotes").addEventListener("click", function () {
-	// 	document.getElementById("enable_emotes").hidden = false;
-	// 	document.getElementById("disable_emotes").hidden = true;
-	// });
-
-	// ABOUT
-
-	document.querySelector("#about").addEventListener("click", function () {
-		window.open("https://github.com/louisnfr/42-better-blackhole");
+	chrome.storage.sync.get({ enabled: true }, function (storage) {
+		toggleEnabledUI(storage.enabled);
 	});
+
+	chrome.storage.sync.get({ emotes: true }, function (storage) {
+		toggleEmotesUI(storage.emotes);
+	});
+
+	{	// EVENTS ON CLICK
+		document.querySelector("#about").addEventListener("click", function () {
+			window.open("https://github.com/louisnfr/42-better-blackhole");
+		});
+
+		document.querySelector("#hide").addEventListener("click", function () {
+			toggleEmotes(false, EmotesMessage);
+		}, false);
+
+		document.querySelector("#show").addEventListener("click", function () {
+			toggleEmotes(true, EmotesMessage);
+		}, false);
+
+		document.querySelector("#disable").addEventListener("click", function () {
+		toggleEnabled(false, ReloadMessage);
+		}, false);
+
+		document.querySelector("#enable").addEventListener("click", function () {
+			toggleEnabled(true, ReloadMessage);
+		}, false);
+	}
 
 	function toggleEnabled(enabled, callback) {
 		chrome.storage.sync.set(
@@ -44,21 +41,45 @@ document.addEventListener("DOMContentLoaded", function () {
 		);
 	}
 
-	function toggleEnabledUI(enabled) {
-		document.querySelector("#enable_ext").classList.toggle("hide", enabled);
-		document.querySelector("#disable_ext").classList.toggle("hide", !enabled);
+	function toggleEmotes(enabled, callback) {
+		chrome.storage.sync.set(
+		{
+			emotes: enabled
+		},
+		function () {
+			toggleEmotesUI(enabled);
+			if (callback) callback(enabled);
+		}
+		);
 	}
 
-	function settingsSavedReloadMessage(enabled) {
-		setStatusMessage(
-		  `${enabled ? "Enabled" : "Disabled"}. Reload page to see changes`
-		);
-	  }
+	function toggleEnabledUI(enabled) {
+		document.querySelector("#enable").classList.toggle("hide", enabled);
+		document.querySelector("#disable").classList.toggle("hide", !enabled);
+	}
 
-	  function setStatusMessage(str) {
-		const status_element = document.querySelector("#status_ext");
+	function toggleEmotesUI(enabled) {
+		document.querySelector("#show").classList.toggle("hide", enabled);
+		document.querySelector("#hide").classList.toggle("hide", !enabled);
+	}
+
+	function ReloadMessage(enabled) {
+		setStatusMessage(
+			`${enabled ? "Enabled" : "Disabled"}. Reload to see changes`,
+			"status"
+		);
+	}
+
+	function EmotesMessage(enabled) {
+		setStatusMessage(
+			`${enabled ? "Shown" : "Hidden"}. Reload to see changes`,
+			"status_em"
+		);
+	}
+
+	function setStatusMessage(str, status) {
+		const status_element = document.querySelector("#" + status);
 		status_element.classList.toggle("hide", false);
 		status_element.innerText = str;
-	  }
-
-}, false);
+	}
+});
