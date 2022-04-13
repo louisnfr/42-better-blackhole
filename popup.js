@@ -65,14 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	function ReloadMessage(enabled) {
 		setStatusMessage(
-			`${enabled ? "Enabled" : "Disabled"}. Reload to see changes`,
+			`${enabled ? "Extension enabled" : "Extension disabled"}. Reload to see changes.`,
 			"status"
 		);
 	}
 
 	function EmotesMessage(enabled) {
 		setStatusMessage(
-			`${enabled ? "Shown" : "Hidden"}. Reload to see changes`,
+			`${enabled ? "Shown emotes" : "Hidden emotes"}. Reload to see changes.`,
 			"status_em"
 		);
 	}
